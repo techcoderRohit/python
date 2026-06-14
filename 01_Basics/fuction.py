@@ -1,0 +1,98 @@
+#creating a function
+
+def fun():
+    print("Welcome to python world")
+
+#calling a function
+
+def fun():
+    print("Hello Rohit")
+    
+fun()
+
+def evenOdd(x):
+    if (x % 2 == 0):
+        return "Even"
+    else:
+        return "Odd"
+
+print(evenOdd(16))
+print(evenOdd(7))
+
+#Types of function arguments
+
+#default argument
+
+def myFun(x, y=50):
+    print("x: ", x)
+    print("y: ", y)
+
+myFun(10)
+
+#keyword argument
+
+def student(fname, lname):
+    print(fname, lname)
+
+student(fname='siya', lname='sharma')
+student(lname='sharma', fname='siya')
+
+#positional arguments
+
+def nameAge(name, age):
+    print("Hi, I am", name)
+    print("My age is ", age)
+
+print("Case-1:")
+nameAge("raj", 27)
+
+print("Case-2:")
+nameAge(27, "raj")
+
+#Arbitrary arguments
+
+def myFun(*args, **kwargs):
+    print("Non-Keyword Arguments (*args):")
+    for arg in args:
+        print(arg)
+
+    print("Keyword Arguments (**kwargs):")
+    for key, value in kwargs.items():
+        print(f"{key} == {value}")
+
+myFun('Hey', 'Welcome', first='raj', mid='for', last='gautam')
+
+#function within functions
+
+def f1():
+    s = 'I love India'
+    def f2():
+        print(s)
+        
+    f2()
+f1()
+
+#return statement
+
+def sq_value(num):
+    return num**2
+
+print(sq_value(2))
+print(sq_value(-4))
+
+#pass by reference and pass by value
+
+def myFun(x):
+    x[0] = 20
+
+b = [10, 11, 12, 13]
+myFun(b)
+print(b)
+
+def myFun2(x):
+    x = 20
+
+a = 10
+myFun2(a)
+print(a)
+
