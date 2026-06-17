@@ -62,6 +62,48 @@ def myFun(*args, **kwargs):
 
 myFun('Hey', 'Welcome', first='raj', mid='for', last='gautam')
 
+# *args example
+def fun(*args):
+    return sum(args)
+
+print(fun(5, 10, 15))   
+
+# **kwargs example
+def fun(**kwargs):
+    for k, val in kwargs.items():
+        print(k, val)
+
+fun(a=1, b=2, c=3)
+
+def myFun(*argv):
+    for arg in argv:
+        print(arg)
+
+myFun('Hello', 'Welcome', 'to', 'India')
+
+def multiply(*args):
+    result = 1
+    for num in args:
+        result *= num
+    return result
+
+print(multiply(2, 3, 4))
+
+def fun(**kwargs):
+    for k, val in kwargs.items():
+        print(k, "=", val)
+
+fun(s1='Python', s2='is', s3='Awesome')
+
+#using both *args and **kwargs
+
+def student_info(*args, **kwargs):
+    print("Subjects:", args)        # Positional arguments
+    print("Details:", kwargs)       # Keyword arguments
+
+# Passing subjects as *args and details as **kwargs
+student_info("Math", "Science", "English", Name="Dora", Age=20, City="Japan")
+
 #function within functions
 
 def f1():
