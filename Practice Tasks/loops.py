@@ -85,3 +85,62 @@ for i in range(1, n + 1):
         continue
     print("Odd number:", i)
 
+
+#11. reverse a string using loops
+
+str = "python"
+rev_str = ""
+
+for char in str:
+    rev_str = char + rev_str
+
+print(rev_str)
+
+#!2. find the first non - repeated characters
+
+str = "teeter"
+
+for char in str:
+    if str.count(char) == 1:
+        print("Char is: ",char)
+        break
+
+#13. factorial number using while loop
+
+number = 5
+fact = 1
+
+while number > 0:
+    fact = fact * number
+    number = number - 1
+
+print("Factorial:", fact)
+
+#14. check if number is a prime
+
+number = 29
+is_prime = True
+
+if number > 1:
+    for i in range(2, number):
+        if (number % i) == 0:
+            is_prime = False
+            break
+
+print(is_prime)
+
+#15. List uniqueness checker
+
+items = ["apple","banana","orange","mango","apple"]
+unique_item = set()
+
+for item in items:
+    if item in unique_item:
+        print("Duplicate: ",item)
+        break
+    unique_item.add(item)
+
+
+
+
+    
