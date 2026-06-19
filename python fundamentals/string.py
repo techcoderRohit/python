@@ -99,3 +99,23 @@ print(s)
 s = "BBD University"
 print("BBD" in s)
 print("Universe" in s)
+
+chai = "Lemon, Ginger, Masala, Mint"
+print(chai.split(", "))
+
+chai = "Masala Chai"
+print(chai.find("Chai"))
+
+chai = " Masala chai chai chai"
+print(chai.count("chai"))
+
+chai = "masala chai"
+quantity = 2
+order = "I ordered {} cups of {} chai"
+print(order.format(quantity, chai))
+
+chai_variety = ["lemon","ginger","masala"]
+print(" ".join(chai_variety))
+print("-".join(chai_variety))
+print(", ".join(chai_variety))
+

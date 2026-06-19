@@ -139,3 +139,63 @@ match grade:
         print("Average")
     case _:
         print("Fail")
+
+#15. check positive or negative
+
+num = float(input("Enter num: "))
+
+if num > 0:
+    print('Positive')
+elif num < 0:
+    print('negative')
+else:
+    print('Zero')
+
+#16. Greatest of two numbers
+
+num1 = float(input('Enter number1: '))
+num2 = float(input('Enter number2: '))
+
+if num1 > num2:
+    print(f"{num1} is greater")
+elif num2 > num1:
+    print(f"{num2} is greater")
+else:
+    print("Both numbers are equal")
+
+#17. Leap year checker
+
+year = int(input("Enter a year: "))
+
+if(year % 4 == 0 and year % 100 != 0 ) or (year % 400 == 0):
+    print("Leap year")
+else:
+    print("Not Leap year")
+
+#18. check vowel or consonant
+
+letter = input("Enter letter: ")
+if letter in ['a','e','i','o','u']:
+    print('vowel')
+else:
+    print('consonant')
+
+#19. Simple calculator logic
+
+num1 = float(input("Enter number1: "))
+num2 = float(input("Enter number2: "))
+operator = input("Enter Operator (+, -, *, /): ")
+
+if operator == '+':
+    print("Result:", num1 + num2)
+elif operator == '-':
+    print("Result:", num1 - num2)
+elif operator == '*':
+    print("Result:", num1 * num2)
+elif operator == '/':
+    if num2 != 0:
+        print("Result:", num1 / num2)
+    else:
+        print("Error! Zero se divide nahi kiya ja sakta.")
+else:
+    print("Invalid Operator!")
