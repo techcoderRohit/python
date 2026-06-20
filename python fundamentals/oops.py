@@ -49,14 +49,22 @@ class Car:
     
     def __init__(self, brand, model):
         self.__brand = brand
-        self.model = model
+        self.__model = model
         Car.car_count += 1
 
     def full_name(self):
-        return f"{self.__brand} {self.model}"
+        return f"{self.__brand} {self.__model}"
     
     def get_brand(self):
         return self.__brand
+    
+    @property
+    def model(self):
+        return self.__model
+    
+    @model.setter
+    def model(self, value):
+        raise AttributeError("Cannot modify model attribute - it is read-only")
     
     def fuel_type(self):
         return "Petrol/Diesel"
@@ -136,3 +144,161 @@ print("\n--- Static Method Example 2 ---")
 print("General Information:")
 print(f"  {Car.car_description()}")
 print(f"  Total cars created so far: {Car.get_car_count()}")
+
+#use a property decorator in the car class to make the model attribute read-only.
+
+print("\n--- Property Decorator Example (Read-Only) ---")
+car_readonly = Car("Mercedes", "C-Class")
+
+# Reading the model attribute using property (works fine)
+print(f"Car Model (Read): {car_readonly.model}")
+print(f"Car Full Name: {car_readonly.full_name()}")
+
+# Trying to modify the model attribute (will raise error)
+print("\nAttempting to modify model attribute...")
+try:
+    car_readonly.model = "E-Class"
+except AttributeError as e:
+    print(f"Error: {e}")
+
+# Example 2: Multiple cars with read-only model
+print("\n--- Property Decorator Example 2 ---")
+cars_list = [
+    Car("Audi", "A4"),
+    Car("BMW", "Series 3"),
+    Car("Volvo", "S90")
+]
+
+print("Fleet Information (All models are read-only):")
+for car in cars_list:
+    print(f"  {car.full_name()} - Model: {car.model}")
+
+# Attempting to modify in a loop
+print("\nTrying to modify models in loop...")
+for car in cars_list:
+    try:
+        car.model = "Modified Model"
+    except AttributeError as e:
+        print(f"  Cannot modify {car.full_name()}: {e}")
+
+#Demonstrate the use of isinstance() to check if my_tesla is an instance of car and electric car
+
+print("\n--- isinstance() Example 1 ---")
+my_tesla = ElectricCar("Tesla", "Model X", "100 kWh")
+
+# Check if my_tesla is an instance of different classes
+print(f"my_tesla is instance of ElectricCar: {isinstance(my_tesla, ElectricCar)}")
+print(f"my_tesla is instance of Car: {isinstance(my_tesla, Car)}")
+print(f"my_tesla is instance of HybridCar: {isinstance(my_tesla, HybridCar)}")
+print(f"my_tesla is instance of str: {isinstance(my_tesla, str)}")
+
+# Example 2: Using isinstance() with multiple object types
+print("\n--- isinstance() Example 2 ---")
+my_tesla = ElectricCar("Tesla", "Model X", "100 kWh")
+regular_car = Car("Maruti", "800")
+hybrid_car = HybridCar("Toyota", "Prius", "50L")
+battery_size = "100 kWh"
+
+print("Type checking different objects:")
+print(f"  my_tesla is ElectricCar? {isinstance(my_tesla, ElectricCar)}")
+print(f"  my_tesla is Car (parent)? {isinstance(my_tesla, Car)}")
+print(f"  regular_car is Car? {isinstance(regular_car, Car)}")
+print(f"  regular_car is ElectricCar? {isinstance(regular_car, ElectricCar)}")
+print(f"  hybrid_car is HybridCar? {isinstance(hybrid_car, HybridCar)}")
+print(f"  hybrid_car is Car (parent)? {isinstance(hybrid_car, Car)}")
+print(f"  battery_size is str? {isinstance(battery_size, str)}")
+
+# Example 3: Using isinstance() in conditional logic
+print("\n--- isinstance() Example 3 (Practical Usage) ---")
+all_vehicles = [
+    Car("Honda", "Civic"),
+    ElectricCar("Nissan", "Leaf", "62 kWh"),
+    HybridCar("Lexus", "NX", "45L"),
+    ElectricCar("BMW", "i3", "42.2 kWh"),
+    Car("Hyundai", "Creta")
+]
+
+print("Categorizing vehicles:")
+for vehicle in all_vehicles:
+    if isinstance(vehicle, ElectricCar):
+        print(f"  ⚡ {vehicle.full_name()} - Electric (Battery: {vehicle.battery_size})")
+    elif isinstance(vehicle, HybridCar):
+        print(f"  🔋 {vehicle.full_name()} - Hybrid (Fuel Tank: {vehicle.fuel_capacity})")
+    else:
+        print(f"  🚗 {vehicle.full_name()} - Regular Car")
+
+#create two classes battery and engine and let the electric car class inherit from both, demonstrating multiple inheritance
+
+# Class 1: Battery
+class Battery:
+    def __init__(self, capacity, voltage):
+        self.capacity = capacity
+        self.voltage = voltage
+    
+    def battery_info(self):
+        return f"Battery: {self.capacity}kWh, {self.voltage}V"
+    
+    def charge(self):
+        return "🔌 Battery is charging..."
+
+# Class 2: Engine
+class Engine:
+    def __init__(self, motor_type, power):
+        self.motor_type = motor_type
+        self.power = power
+    
+    def engine_info(self):
+        return f"Engine: {self.motor_type} Motor, {self.power}kW"
+    
+    def start_engine(self):
+        return "⚡ Electric motor started!"
+
+# Class 3: ElectricCar inheriting from Car, Battery, and Engine (Multiple Inheritance)
+class AdvancedElectricCar(Car, Battery, Engine):
+    def __init__(self, brand, model, battery_capacity, voltage, motor_type, power):
+        Car.__init__(self, brand, model)
+        Battery.__init__(self, battery_capacity, voltage)
+        Engine.__init__(self, motor_type, power)
+    
+    def display_specs(self):
+        print(f"Car: {self.full_name()}")
+        print(f"  {self.battery_info()}")
+        print(f"  {self.engine_info()}")
+
+# Example 1: Simple Multiple Inheritance Demo
+print("\n--- Multiple Inheritance Example 1 ---")
+tesla = AdvancedElectricCar("Tesla", "Model S", 100, 400, "AC Induction", 325)
+
+print(tesla.full_name())
+print(tesla.battery_info())
+print(tesla.engine_info())
+print(tesla.start_engine())
+print(tesla.charge())
+
+# Example 2: Using Multiple Inherited Methods
+print("\n--- Multiple Inheritance Example 2 ---")
+electric_vehicles = [
+    AdvancedElectricCar("Tesla", "Model 3", 75, 400, "Permanent Magnet", 280),
+    AdvancedElectricCar("Nissan", "Leaf", 62, 400, "AC Induction", 110),
+    AdvancedElectricCar("BMW", "i4", 81.5, 400, "Dual Motor", 380)
+]
+
+print("Fleet Specifications:")
+for ev in electric_vehicles:
+    print(f"\n{ev.full_name()}")
+    print(f"  → {ev.battery_info()}")
+    print(f"  → {ev.engine_info()}")
+    print(f"  → {ev.start_engine()}")
+    print(f"  → {ev.charge()}")
+
+# Example 3: Demonstrating MRO (Method Resolution Order)
+print("\n--- Multiple Inheritance Example 3 (MRO) ---")
+print("Method Resolution Order (MRO) for AdvancedElectricCar:")
+print(f"MRO: {[cls.__name__ for cls in AdvancedElectricCar.__mro__]}")
+
+tesla_mro = AdvancedElectricCar("Tesla", "Model X", 100, 400, "Dual Motor", 450)
+print(f"\nIsinstance checks:")
+print(f"  Is instance of AdvancedElectricCar? {isinstance(tesla_mro, AdvancedElectricCar)}")
+print(f"  Is instance of Car? {isinstance(tesla_mro, Car)}")
+print(f"  Is instance of Battery? {isinstance(tesla_mro, Battery)}")
+print(f"  Is instance of Engine? {isinstance(tesla_mro, Engine)}")
