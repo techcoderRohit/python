@@ -82,5 +82,32 @@ a = [[1, 2], [3, 4]]
 print(a[0])
 print(a[1][0])
 
+#list comprehension
+
+a = [2, 3, 4, 5]
+res = [val ** 2 for val in a]
+print(res)
+
+a = [1, 2, 3, 4, 5]
+res = [val for val in a if val % 2 == 0]
+print(res)
+
+b = [5, 12, 7, 18, 3, 20]
+res = [val for val in b if val > 10]
+print(res)
+
+#creating a list from a range
+a = [i for i in range(10)]
+print(a)
+
+#using nested loops
+c = [(x, y) for x in range(3) for y in range(3)]
+print(c)
+
+#flattening a list of lists
+mat = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+res = [val for row in mat for val in row]
+print(res)
+
 
 
