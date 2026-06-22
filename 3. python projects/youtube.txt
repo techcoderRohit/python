@@ -1,0 +1,10 @@
+[
+  {
+    "name": "chai and frontend",
+    "time": 30
+  },
+  {
+    "name": "chai aur python",
+    "time": 40
+  }
+]
